@@ -1,6 +1,1 @@
-target/
-run/
-**/*.log
-**.sif
-./distribute-jobs.yaml
-./tests/apptainer_local/output
+book
