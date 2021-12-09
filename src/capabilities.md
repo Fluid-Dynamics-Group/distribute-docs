@@ -1,3 +1,0 @@
-# Available Capabilities
-
-  TODO
