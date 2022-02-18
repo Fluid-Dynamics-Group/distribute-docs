@@ -1068,6 +1068,22 @@ assert(allowed_processors_int, 16)
 <p><strong>You must ensure that you use all available cores on the machine</strong>. If your code can only use a reduced number
 of cores, make sure you specify this in your <code>capabilities</code> section! <strong>Do not run single threaded
 processes on the distributed computing network - they will not go faster</strong>.</p>
+<p>Full documentation on apptainer definition files can be found on the <a href="https://apptainer.org/user-docs/master/definition_files.html">official site</a>. 
+If you are building an apptainer image based on nvidia HPC resources, your header would look something like this 
+(<a href="https://catalog.ngc.nvidia.com/orgs/nvidia/containers/nvhpc">nvidia documentation</a>):</p>
+<pre><code>Bootstrap: docker
+From: nvcr.io/nvidia/nvhpc:22.1-devel-cuda_multi-ubuntu20.05
+</code></pre>
+<h2 id="building-apptainer-images"><a class="header" href="#building-apptainer-images">Building Apptainer Images</a></h2>
+<p>Compiling an apptainer definition file to a <code>.sif</code> file to run on the <code>distribute</code> compute is relatively simple (on linux). Run something like this:</p>
+<pre><code>mkdir ~/singularity
+SINGULARITY_TMPDIR=&quot;~/singularity&quot; sudo -E singularity build your-output-file.sif build.singularity
+</code></pre>
+<p>where <code>your-output-file.sif</code> is the desired name of the <code>.sif</code> file that apptainer will spit out, and <code>build.singularity</code> is the 
+definition file you have built. The <code>SINGULARITY_TMPDIR=&quot;~/singularity&quot;</code> portion of the command sets the <code>SINGULARITY_TMPDIR</code> environment
+variable to a location on disk (<code>~/singularity</code>) because singularity / apptainer can often require more memory to compile the <code>sif</code> file
+than what is available on your computer (yes, more than your 64 GB). Since <code>singularity build</code> requires root privileges, it must be run with <code>sudo</code>. The additional
+<code>-E</code> passed to <code>sudo</code> copies the environment variables from the host shell (which is needed for <code>SINGULARITY_TMPDIR</code>)</p>
 <h2 id="binding-volumes-mutable-filesystems"><a class="header" href="#binding-volumes-mutable-filesystems">Binding Volumes (Mutable Filesystems)</a></h2>
 <p>In order for your compute job to do meaningful work, you will likely save some files. But we know that 
 apptainer image files are not mutable. The answer to this problem is binding volumes. A &quot;volume&quot; 
