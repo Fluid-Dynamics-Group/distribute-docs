@@ -195,7 +195,7 @@ meta:
   capabilities:
     - gfortran
     - python3
-    - singularity
+    - apptainer
 python:
   initialize:
     build_file: /path/to/build.py
@@ -216,7 +216,7 @@ python:
           alias: input.json
 </code></pre>
 <p>and</p>
-<pre><code class="language-bash">distribute template singularity
+<pre><code class="language-bash">distribute template apptainer
 </code></pre>
 <pre><code class="language-yaml">---
 meta:
@@ -226,8 +226,8 @@ meta:
   capabilities:
     - gfortran
     - python3
-    - singularity
-singularity:
+    - apptainer
+apptainer:
   initialize:
     sif: execute_container.sif
     required_files:

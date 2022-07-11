@@ -160,7 +160,7 @@ benefits for using apptainer from an implementation standpoint in <code>distribu
 <li>Once your code has been packaged in apptainer, it is very easy to run it on paid HPC clusters</li>
 </ol>
 <h2 id="apptainer-definition-files"><a class="header" href="#apptainer-definition-files">Apptainer definition files</a></h2>
-<p>This documentation is not the place to discuss the intricacies of singularity / apptainer. As a user, we have tried to make
+<p>This documentation is not the place to discuss the intricacies of apptainer. As a user, we have tried to make
 it as easy as possible to build an image that can run on <code>distribute</code>. 
 The <a href="https://github.com/Fluid-Dynamics-Group/apptainer-common">apptainer-common</a> was purpose built to give you a good
 starting place with compilers and runtimes (including fortran, C++, openfoam, python3). Your definition file
@@ -247,7 +247,7 @@ From: library://vanillabrooks/default/fluid-dynamics-common
 </code></pre>
 <p>I want to emphasize one specific thing from this file: the <code>%apprun distribute</code> section is very important. On a node 
 with 16 cores, your <code>distribute</code> section gets called like this:</p>
-<pre><code>singularity run --app distribute 16
+<pre><code>apptainer run --app distribute 16
 </code></pre>
 <p>In reality, this call is actually slightly more complex (see below), but this command is illustrative of the point.
 <strong>You must ensure you pass the number of allowed cores down to whatever run script you are using</strong>. In our example:</p>
@@ -275,14 +275,14 @@ From: nvcr.io/nvidia/nvhpc:22.1-devel-cuda_multi-ubuntu20.05
 </code></pre>
 <h2 id="building-apptainer-images"><a class="header" href="#building-apptainer-images">Building Apptainer Images</a></h2>
 <p>Compiling an apptainer definition file to a <code>.sif</code> file to run on the <code>distribute</code> compute is relatively simple (on linux). Run something like this:</p>
-<pre><code>mkdir ~/singularity
-SINGULARITY_TMPDIR=&quot;~/singularity&quot; sudo -E singularity build your-output-file.sif build.singularity
+<pre><code>mkdir ~/apptainer
+APPTAINER_TMPDIR=&quot;~/apptainer&quot; sudo -E apptainer build your-output-file.sif build.apptainer
 </code></pre>
-<p>where <code>your-output-file.sif</code> is the desired name of the <code>.sif</code> file that apptainer will spit out, and <code>build.singularity</code> is the 
-definition file you have built. The <code>SINGULARITY_TMPDIR=&quot;~/singularity&quot;</code> portion of the command sets the <code>SINGULARITY_TMPDIR</code> environment
-variable to a location on disk (<code>~/singularity</code>) because singularity / apptainer can often require more memory to compile the <code>sif</code> file
-than what is available on your computer (yes, more than your 64 GB). Since <code>singularity build</code> requires root privileges, it must be run with <code>sudo</code>. The additional
-<code>-E</code> passed to <code>sudo</code> copies the environment variables from the host shell (which is needed for <code>SINGULARITY_TMPDIR</code>)</p>
+<p>where <code>your-output-file.sif</code> is the desired name of the <code>.sif</code> file that apptainer will spit out, and <code>build.apptainer</code> is the 
+definition file you have built. The <code>APPTAINER_TMPDIR=&quot;~/apptainer&quot;</code> portion of the command sets the <code>APPTAINER_TMPDIR</code> environment
+variable to a location on disk (<code>~/apptainer</code>) because apptainer / apptainer can often require more memory to compile the <code>sif</code> file
+than what is available on your computer (yes, more than your 64 GB). Since <code>apptainer build</code> requires root privileges, it must be run with <code>sudo</code>. The additional
+<code>-E</code> passed to <code>sudo</code> copies the environment variables from the host shell (which is needed for <code>APPTAINER_TMPDIR</code>)</p>
 <h2 id="binding-volumes-mutable-filesystems"><a class="header" href="#binding-volumes-mutable-filesystems">Binding Volumes (Mutable Filesystems)</a></h2>
 <p>In order for your compute job to do meaningful work, you will likely save some files. But we know that 
 apptainer image files are not mutable. The answer to this problem is binding volumes. A &quot;volume&quot; 
@@ -295,19 +295,19 @@ access to a folder to save things to (in python: <code>./distribute_save</code>)
 you specified (in python: <code>./distribute_save</code>). Apptainer makes these folders slightly easier to access by binding them
 to the root directory: <code>/distribute_save</code> and <code>/input</code>. When running your apptainer on the compute node with 16
 cores, the following command is used to ensure that these bindings happen:</p>
-<pre><code class="language-bash">singularity run singularity.sif --app distribute --bind \
+<pre><code class="language-bash">apptainer run apptainer_file.sif --app distribute --bind \
 	path/to/a/folder:/distribute_save:rw,\
 	path/to/another/folder:/input:rw\
 	16
 </code></pre>
 <p>Note that the binding arguments are simply a comma separated list in the format <code>folder_on_host:folder_in_container:rw</code>
 where <code>rw</code> specifies that files in the folder are readable and writeable.
-If your configuration file for singularity looks like this:</p>
+If your configuration file for apptainer looks like this:</p>
 <pre><code class="language-yaml">meta:
   batch_name: your_jobset_name
   namespace: example_namespace
   capabilities: []
-singularity:
+apptainer:
   initialize:
     sif: execute_container.sif
     required_files:
@@ -359,7 +359,7 @@ we simply just need to add this path to our configuration file:</p>
   batch_name: your_jobset_name
   namespace: example_namespace
   capabilities: []
-singularity:
+apptainer:
   initialize:
     sif: execute_container.sif
     required_files:
@@ -376,7 +376,7 @@ singularity:
       required_files: []
 </code></pre>
 <p>By adding this line, your container will be invoked like this (on a 16 core machine):</p>
-<pre><code>singularity run singularity.sif --app distribute --bind \
+<pre><code>apptainer run apptainer_file.sif --app distribute --bind \
 	path/to/a/folder:/distribute_save:rw,\
 	path/to/another/folder:/input:rw,\
 	path/to/yet/another/folder/:/output:rw\
@@ -384,7 +384,7 @@ singularity:
 </code></pre>
 <h2 id="configuration-file"><a class="header" href="#configuration-file">Configuration File</a></h2>
 <p>A default configuration file can be generated with :</p>
-<pre><code>distribute template singularity
+<pre><code>distribute template apptainer
 </code></pre>
 <pre><code class="language-yaml">---
 meta:
@@ -394,8 +394,8 @@ meta:
   capabilities:
     - gfortran
     - python3
-    - singularity
-singularity:
+    - apptainer
+apptainer:
   initialize:
     sif: execute_container.sif
     required_files:
@@ -416,10 +416,10 @@ singularity:
           alias: input.json
 </code></pre>
 <p>The <code>meta</code> section is identical to the <code>meta</code> section of python. For apptainer configurations, the only 
-<code>capability</code> you need to specify is <code>singularity</code> or <code>apptainer</code>. If you require your job to use a gpu,
+<code>capability</code> you need to specify is <code>apptainer</code> or <code>apptainer</code>. If you require your job to use a gpu,
 you can also specify a <code>gpu</code> capability.</p>
 <p>The <code>initialize</code> section takes in a single <code>.sif</code> file
-that is built using the <code>singularity build</code> command on a definition file, as well as some files that you always want
+that is built using the <code>apptainer build</code> command on a definition file, as well as some files that you always want
 to be available in the <code>/input</code> directory. Then, the <code>required_mounts</code> provides a way to bind mutable directories 
 to the inside of the container. Make sure that the directory you are binding to does not actually exist in the container
 (but its parent directory <em>does</em> exist).</p>
@@ -493,7 +493,7 @@ meta:
   batch_name: some_batch
   namespace: some_namespace
   capabilities: []
-singularity:
+apptainer:
   initialize:
     sif: apptainer_local.sif
     required_files: []
@@ -531,7 +531,7 @@ Then, execute the job locally:</p>
 ├── initial_files
 ├── input
 │   └── input.txt
-└── singularity.sif
+└── apptainer_file.sif
 </code></pre>
 <p>This shows that we were able to write to additional folders on the host system (<code>_bind_path_x</code>), as well as read and write output files. Its worth noting that 
 if this job was run on the distributed server, it would not be archived the same (<code>archive_files</code> directory is simply a way to save <code>distribute_save</code> without
