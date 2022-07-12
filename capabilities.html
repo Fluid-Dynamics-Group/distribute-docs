@@ -144,7 +144,19 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="available-capabilities"><a class="header" href="#available-capabilities">Available Capabilities</a></h1>
-<p>TODO</p>
+<p>Current capabilities of nodes in our lab are tracked as an 
+<a href="https://github.com/Fluid-Dynamics-Group/distribute/blob/master/static/example-nodes.yaml">example file</a> 
+in the repository. There are a few things to take away from this file:</p>
+<h2 id="capabilities-for-apptainer-jobs"><a class="header" href="#capabilities-for-apptainer-jobs">Capabilities for Apptainer jobs</a></h2>
+<p>The only required capability for an apptainer job is <code>apptainer</code>.
+All dependencies and requirements can be handled by you in the apptainer definition file.</p>
+<h2 id="excluding-certain-machines-from-executing-your-job"><a class="header" href="#excluding-certain-machines-from-executing-your-job">Excluding Certain Machines from Executing Your Job</a></h2>
+<p>While any machine can run your jobs if they match the capabilities, sometimes you wish to avoid a machine 
+if you know that someone will be running cases locally (not through the distributed system) and will simply
+<code>distribute pause</code> your jobs - delaying the finish for your batch. 
+To account for this possibility, you can add a capability <code>lab1</code> to only run the job on the <code>lab1</code> machine, <code>lab2</code> to only
+run on <code>lab2</code>, etc. If you simply dont want to run on <code>lab3</code>, then you can specify <code>lab1-2</code>. Likewise, you can skip <code>lab1</code> with
+<code>lab2-3</code>.</p>
 
                     </main>
 
