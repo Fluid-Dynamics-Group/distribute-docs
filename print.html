@@ -83,7 +83,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="install.html"><strong aria-hidden="true">2.</strong> Installation</a></li><li class="chapter-item expanded "><a href="commands.html"><strong aria-hidden="true">3.</strong> Command Basics</a></li><li class="chapter-item expanded "><a href="configuration.html"><strong aria-hidden="true">4.</strong> Configuration</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="python.html"><strong aria-hidden="true">4.1.</strong> Python Jobs</a></li><li class="chapter-item expanded "><a href="apptainer.html"><strong aria-hidden="true">4.2.</strong> Apptainer Jobs</a></li></ol></li><li class="chapter-item expanded "><a href="capabilities.html"><strong aria-hidden="true">5.</strong> Available Capabilities</a></li></ol>            </div>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="install.html"><strong aria-hidden="true">2.</strong> Installation</a></li><li class="chapter-item expanded "><a href="commands.html"><strong aria-hidden="true">3.</strong> Command Basics</a></li><li class="chapter-item expanded "><a href="configuration.html"><strong aria-hidden="true">4.</strong> Configuration</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="python.html"><strong aria-hidden="true">4.1.</strong> Python Jobs</a></li><li class="chapter-item expanded "><a href="apptainer.html"><strong aria-hidden="true">4.2.</strong> Apptainer Jobs</a></li></ol></li><li class="chapter-item expanded "><a href="capabilities.html"><strong aria-hidden="true">5.</strong> Available Capabilities</a></li><li class="chapter-item expanded "><a href="machines.html"><strong aria-hidden="true">6.</strong> Machines</a></li></ol>            </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
 
@@ -1372,6 +1372,22 @@ if you know that someone will be running cases locally (not through the distribu
 To account for this possibility, you can add a capability <code>lab1</code> to only run the job on the <code>lab1</code> machine, <code>lab2</code> to only
 run on <code>lab2</code>, etc. If you simply dont want to run on <code>lab3</code>, then you can specify <code>lab1-2</code>. Likewise, you can skip <code>lab1</code> with
 <code>lab2-3</code>.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="machines"><a class="header" href="#machines">Machines</a></h1>
+<table><thead><tr><th>name</th><th>physical core count</th><th>address</th><th>role</th></tr></thead><tbody>
+<tr><td>lab1</td><td>16</td><td>134.197.94.134</td><td>compute</td></tr>
+<tr><td>lab2</td><td>16</td><td>134.197.95.127</td><td>compute</td></tr>
+<tr><td>lab3</td><td>32</td><td>134.197.94.179</td><td>compute</td></tr>
+<tr><td>lab4</td><td>12</td><td>134.197.95.37</td><td>storage</td></tr>
+<tr><td>distserver</td><td>12</td><td>134.197.95.21</td><td>head node</td></tr>
+</tbody></table>
+<ul>
+<li>If you are adding a job with <code>distribute add</code>, you should use <code>distserver</code> ip address.</li>
+<li>If you are updating the <code>distribute</code> source code on all machines, you should use <code>lab1</code>, <code>lab2</code>, <code>lab3</code> and <code>distserver</code>
+<ul>
+<li><code>lab4</code> server must be accessed through a FreeBSD jail</li>
+</ul>
+</li>
+</ul>
 
                     </main>
 
