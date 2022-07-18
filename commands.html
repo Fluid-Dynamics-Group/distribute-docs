@@ -266,7 +266,7 @@ and all processes will be automatically resumed.</p>
 </code></pre>
 <pre><code class="language-bash">distribute pause 60s
 </code></pre>
-<h2 id="status"><a class="header" href="#status">status</a></h2>
+<h2 id="server-status"><a class="header" href="#server-status">server-status</a></h2>
 <p><code>distribute status</code> prints out all the running jobs at the head node. It will show you all the job batches
 that are currently running, as well as the number of jobs in that set currently running and the 
 names of the jobs that have not been run yet. You can use this command to fetch the required parameters
@@ -275,6 +275,16 @@ to execute the <code>kill</code> command if needed.</p>
 </code></pre>
 <p>If there is no output then there are no jobs currently in the queue or executing on nodes.</p>
 <p><strong>TODO</strong> An example output here</p>
+<pre><code>260sec
+        :jobs running now: 1
+10sec_positive
+        -unforced_viscous_decay
+        -unforced_inviscid_decay
+        -viscous_forcing_no_compensation_eh_first
+        -viscous_forcing_no_compensation_eh_second
+        -viscous_forcing_no_compensation_eh_both
+        :jobs running now: 0
+</code></pre>
 <h2 id="pull"><a class="header" href="#pull">pull</a></h2>
 <p><code>distribute pull</code> takes a <code>distribute-jobs.yaml</code> config file and pulls all the files associated with that batch
 to a specified <code>--save-dir</code> (default is the current directory). This is really convenient because the only thing
