@@ -333,7 +333,7 @@ directory.</p>
 <h2 id="job-execution-scripts"><a class="header" href="#job-execution-scripts">Job Execution Scripts</a></h2>
 <p>Execution scripts are specified in the <code>file</code> key of a list item a job <code>name</code> in <code>jobs</code>. Execution scripts
 can do a lot of things. I have found it productive to write a single <code>generic_run.py</code> script that
-reads a configuration file from <code>./input/input.json</code> (<code>input.json</code> is spefied under my <code>required_files</code> for the job)
+reads a configuration file from <code>./input/input.json</code> is spefied under my <code>required_files</code> for the job)
 and then run the sovler from there. </p>
 <p>One import thing about execution scripts is that they are run with a command line argument specifying
 how many cores you are allowed to use. If you hardcode the number of cores you use you will either
