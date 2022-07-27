@@ -83,7 +83,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="install.html"><strong aria-hidden="true">2.</strong> Installation</a></li><li class="chapter-item expanded "><a href="commands.html"><strong aria-hidden="true">3.</strong> Command Basics</a></li><li class="chapter-item expanded "><a href="configuration.html"><strong aria-hidden="true">4.</strong> Configuration</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="python.html"><strong aria-hidden="true">4.1.</strong> Python Jobs</a></li><li class="chapter-item expanded "><a href="apptainer.html"><strong aria-hidden="true">4.2.</strong> Apptainer Jobs</a></li></ol></li><li class="chapter-item expanded "><a href="capabilities.html"><strong aria-hidden="true">5.</strong> Available Capabilities</a></li><li class="chapter-item expanded "><a href="machines.html"><strong aria-hidden="true">6.</strong> Machines</a></li></ol>            </div>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="install.html"><strong aria-hidden="true">2.</strong> Installation</a></li><li class="chapter-item expanded "><a href="commands.html"><strong aria-hidden="true">3.</strong> Command Basics</a></li><li class="chapter-item expanded "><a href="configuration.html"><strong aria-hidden="true">4.</strong> Configuration</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="python.html"><strong aria-hidden="true">4.1.</strong> Python Jobs</a></li><li class="chapter-item expanded "><a href="apptainer.html"><strong aria-hidden="true">4.2.</strong> Apptainer Jobs</a></li></ol></li><li class="chapter-item expanded "><a href="python_api.html"><strong aria-hidden="true">5.</strong> Python Api</a></li><li class="chapter-item expanded "><a href="capabilities.html"><strong aria-hidden="true">6.</strong> Available Capabilities</a></li><li class="chapter-item expanded "><a href="machines.html"><strong aria-hidden="true">7.</strong> Machines</a></li></ol>            </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
 
@@ -225,6 +225,9 @@ Install instructions can be found <a href="https://www.rust-lang.org/tools/insta
 <pre><code>cargo install --git https://github.com/fluid-Dynamics-Group/distribute --force
 </code></pre>
 <p>and you are good to go! If you run into any trouble installing, let Brooks know.</p>
+<h2 id="python-api-install"><a class="header" href="#python-api-install">Python api install</a></h2>
+<pre><code>pip3 install distribute_compute_config
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="command-basics"><a class="header" href="#command-basics">Command Basics</a></h1>
 <p>There are a few commands that you will need to know to effectively work with <code>distribute</code>. Don't worry,
 they are not too complex. The full list of commands and their specific parameters can be found by running</p>
@@ -1367,6 +1370,92 @@ deleting data). The structure on the server would look like this:</p>
 </code></pre>
 <p>and</p>
 <pre><code>the square of the input was 225
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="python-api"><a class="header" href="#python-api">Python Api</a></h1>
+<p>Since solver configuration files are sometimes machine generated, it can be arduous to manually create 
+<code>distribute-jobs.yaml</code> files with methods like <code>distribute template</code>. To aid in this difficulty, a python
+package is available to generate configurations with minimal effort.</p>
+<h2 id="full-documentation"><a class="header" href="#full-documentation">Full Documentation</a></h2>
+<p>Detailed documentation can be built:</p>
+<pre><code>git clone https://github.com/fluid-Dynamics-Group/distribute
+cd distribute/pybind
+cargo doc --open
+</code></pre>
+<h2 id="example"><a class="header" href="#example">Example</a></h2>
+<pre><code class="language-python">import distribute_compute_config as distribute 
+
+matrix_user = &quot;@karik:matrix.org&quot;
+batch_name = &quot;test_batch&quot;
+namespace = &quot;test_namespace&quot;
+capabilities = [&quot;apptainer&quot;]
+
+meta = distribute.metadata(namespace, batch_name, capabilities, matrix_user)
+
+sif_path = &quot;./path/to/some/container.sif&quot;
+# the contents of file.h5 will appear in the /input directory under the name `initial_condition.h5`
+initial_condition = distribute.file(&quot;./path/to/some/file.h5&quot;, relative=True, alias=&quot;initial_condition.h5&quot;)
+# a list of files that will /always/ be present in the /input directory of the container
+required_files = [initial_condition]
+# a list of paths inside the container that should be mounted to a folder on the host system.
+required_mounts = [&quot;/solver/extra_mount&quot;]
+
+initialize = distribute.initialize(sif_path, required_files, required_mounts)
+
+#
+# then put together two jobs that will be run using the container 
+#
+
+# config files will always appear in `/input` under the name `config.json`.
+# we use relative paths since otherwise the file must exist (and this is an example)
+job_1_config_file = distribute.file(&quot;./path/to/config1.json&quot;, alias=&quot;config.json&quot;, relative=True)
+job_2_config_file = distribute.file(&quot;./path/to/config2.json&quot;, alias=&quot;config.json&quot;, relative=True)
+
+# all `required files` will appear in the /input directory for their respective job
+job_1_required_files = [job_1_config_file]
+job_2_required_files = [job_2_config_file]
+
+job_1 = distribute.job(&quot;job_1&quot;, job_1_required_files)
+job_2 = distribute.job(&quot;job_2&quot;, job_2_required_files)
+
+jobs = [job_1, job_2]
+
+
+#
+# then put together a full description of the jobs that we will run
+# and the container we will use to run then
+#
+
+description = distribute.description(initialize, jobs)
+
+jobset = distribute.apptainer_config(meta, description)
+distribute.write_config_to_file(jobset,&quot;./distribute-jobs.yaml&quot;)
+</code></pre>
+<p>This generates:</p>
+<pre><code class="language-yaml">---
+meta:
+  batch_name: test_batch
+  namespace: test_namespace
+  matrix: &quot;@karik:matrix.org&quot;
+  capabilities:
+    - apptainer
+apptainer:
+  initialize:
+    sif: &quot;./path/to/some/container.sif&quot;
+    required_files:
+      - path: &quot;./path/to/some/file.h5&quot;
+        alias: initial_condition.h5
+    required_mounts:
+      - /solver/extra_mount
+  jobs:
+    - name: job_1
+      required_files:
+        - path: &quot;./path/to/config1.json&quot;
+          alias: config.json
+    - name: job_2
+      required_files:
+        - path: &quot;./path/to/config2.json&quot;
+          alias: config.json
+
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="available-capabilities"><a class="header" href="#available-capabilities">Available Capabilities</a></h1>
 <p>Current capabilities of nodes in our lab are tracked as an 

@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Machines - distribute-docs</title>
+        <title>Python Api - distribute-docs</title>
                 
 
         <!-- Custom HTML head -->
@@ -82,7 +82,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="install.html"><strong aria-hidden="true">2.</strong> Installation</a></li><li class="chapter-item expanded "><a href="commands.html"><strong aria-hidden="true">3.</strong> Command Basics</a></li><li class="chapter-item expanded "><a href="configuration.html"><strong aria-hidden="true">4.</strong> Configuration</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="python.html"><strong aria-hidden="true">4.1.</strong> Python Jobs</a></li><li class="chapter-item expanded "><a href="apptainer.html"><strong aria-hidden="true">4.2.</strong> Apptainer Jobs</a></li></ol></li><li class="chapter-item expanded "><a href="python_api.html"><strong aria-hidden="true">5.</strong> Python Api</a></li><li class="chapter-item expanded "><a href="capabilities.html"><strong aria-hidden="true">6.</strong> Available Capabilities</a></li><li class="chapter-item expanded "><a href="machines.html" class="active"><strong aria-hidden="true">7.</strong> Machines</a></li></ol>            </div>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="install.html"><strong aria-hidden="true">2.</strong> Installation</a></li><li class="chapter-item expanded "><a href="commands.html"><strong aria-hidden="true">3.</strong> Command Basics</a></li><li class="chapter-item expanded "><a href="configuration.html"><strong aria-hidden="true">4.</strong> Configuration</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="python.html"><strong aria-hidden="true">4.1.</strong> Python Jobs</a></li><li class="chapter-item expanded "><a href="apptainer.html"><strong aria-hidden="true">4.2.</strong> Apptainer Jobs</a></li></ol></li><li class="chapter-item expanded "><a href="python_api.html" class="active"><strong aria-hidden="true">5.</strong> Python Api</a></li><li class="chapter-item expanded "><a href="capabilities.html"><strong aria-hidden="true">6.</strong> Available Capabilities</a></li><li class="chapter-item expanded "><a href="machines.html"><strong aria-hidden="true">7.</strong> Machines</a></li></ol>            </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
 
@@ -143,31 +143,104 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="machines"><a class="header" href="#machines">Machines</a></h1>
-<table><thead><tr><th>name</th><th>physical core count</th><th>address</th><th>role</th></tr></thead><tbody>
-<tr><td>lab1</td><td>16</td><td>134.197.94.134</td><td>compute</td></tr>
-<tr><td>lab2</td><td>16</td><td>134.197.95.127</td><td>compute</td></tr>
-<tr><td>lab3</td><td>32</td><td>134.197.94.179</td><td>compute</td></tr>
-<tr><td>lab4</td><td>12</td><td>134.197.95.37</td><td>storage</td></tr>
-<tr><td>distserver</td><td>12</td><td>134.197.95.21</td><td>head node</td></tr>
-</tbody></table>
-<ul>
-<li>If you are adding a job with <code>distribute add</code>, you should use <code>distserver</code> ip address.</li>
-<li>If you are updating the <code>distribute</code> source code on all machines, you should use <code>lab1</code>, <code>lab2</code>, <code>lab3</code> and <code>distserver</code>
-<ul>
-<li><code>lab4</code> server must be accessed through a FreeBSD jail</li>
-</ul>
-</li>
-</ul>
+                        <h1 id="python-api"><a class="header" href="#python-api">Python Api</a></h1>
+<p>Since solver configuration files are sometimes machine generated, it can be arduous to manually create 
+<code>distribute-jobs.yaml</code> files with methods like <code>distribute template</code>. To aid in this difficulty, a python
+package is available to generate configurations with minimal effort.</p>
+<h2 id="full-documentation"><a class="header" href="#full-documentation">Full Documentation</a></h2>
+<p>Detailed documentation can be built:</p>
+<pre><code>git clone https://github.com/fluid-Dynamics-Group/distribute
+cd distribute/pybind
+cargo doc --open
+</code></pre>
+<h2 id="example"><a class="header" href="#example">Example</a></h2>
+<pre><code class="language-python">import distribute_compute_config as distribute 
+
+matrix_user = &quot;@karik:matrix.org&quot;
+batch_name = &quot;test_batch&quot;
+namespace = &quot;test_namespace&quot;
+capabilities = [&quot;apptainer&quot;]
+
+meta = distribute.metadata(namespace, batch_name, capabilities, matrix_user)
+
+sif_path = &quot;./path/to/some/container.sif&quot;
+# the contents of file.h5 will appear in the /input directory under the name `initial_condition.h5`
+initial_condition = distribute.file(&quot;./path/to/some/file.h5&quot;, relative=True, alias=&quot;initial_condition.h5&quot;)
+# a list of files that will /always/ be present in the /input directory of the container
+required_files = [initial_condition]
+# a list of paths inside the container that should be mounted to a folder on the host system.
+required_mounts = [&quot;/solver/extra_mount&quot;]
+
+initialize = distribute.initialize(sif_path, required_files, required_mounts)
+
+#
+# then put together two jobs that will be run using the container 
+#
+
+# config files will always appear in `/input` under the name `config.json`.
+# we use relative paths since otherwise the file must exist (and this is an example)
+job_1_config_file = distribute.file(&quot;./path/to/config1.json&quot;, alias=&quot;config.json&quot;, relative=True)
+job_2_config_file = distribute.file(&quot;./path/to/config2.json&quot;, alias=&quot;config.json&quot;, relative=True)
+
+# all `required files` will appear in the /input directory for their respective job
+job_1_required_files = [job_1_config_file]
+job_2_required_files = [job_2_config_file]
+
+job_1 = distribute.job(&quot;job_1&quot;, job_1_required_files)
+job_2 = distribute.job(&quot;job_2&quot;, job_2_required_files)
+
+jobs = [job_1, job_2]
+
+
+#
+# then put together a full description of the jobs that we will run
+# and the container we will use to run then
+#
+
+description = distribute.description(initialize, jobs)
+
+jobset = distribute.apptainer_config(meta, description)
+distribute.write_config_to_file(jobset,&quot;./distribute-jobs.yaml&quot;)
+</code></pre>
+<p>This generates:</p>
+<pre><code class="language-yaml">---
+meta:
+  batch_name: test_batch
+  namespace: test_namespace
+  matrix: &quot;@karik:matrix.org&quot;
+  capabilities:
+    - apptainer
+apptainer:
+  initialize:
+    sif: &quot;./path/to/some/container.sif&quot;
+    required_files:
+      - path: &quot;./path/to/some/file.h5&quot;
+        alias: initial_condition.h5
+    required_mounts:
+      - /solver/extra_mount
+  jobs:
+    - name: job_1
+      required_files:
+        - path: &quot;./path/to/config1.json&quot;
+          alias: config.json
+    - name: job_2
+      required_files:
+        - path: &quot;./path/to/config2.json&quot;
+          alias: config.json
+
+</code></pre>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                                                    <a rel="prev" href="capabilities.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                                    <a rel="prev" href="apptainer.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
                         
+                                                    <a rel="next" href="capabilities.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
                         
                         <div style="clear: both"></div>
                     </nav>
@@ -175,10 +248,13 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                                    <a rel="prev" href="capabilities.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                    <a rel="prev" href="apptainer.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
+                                    <a rel="next" href="capabilities.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
                             </nav>
 
         </div>
