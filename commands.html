@@ -261,11 +261,11 @@ period of time.</p>
 and all processes will be automatically resumed. <strong>Do not close your terminal</strong> before the pausing finishes or
 you have canceled it with <code>Ctrl-C</code> as the job on your machine will never resume.</p>
 <p>some examples of this command:</p>
-<pre><code class="language-bash">sudo distribute pause 4h
+<pre><code class="language-bash">sudo distribute pause --duration 4h
 </code></pre>
-<pre><code class="language-bash">sudo distribute pause 1h30m10s
+<pre><code class="language-bash">sudo distribute pause --duration 1h30m10s
 </code></pre>
-<pre><code class="language-bash">sudo distribute pause 60s
+<pre><code class="language-bash">sudo distribute pause --duration 60s
 </code></pre>
 <h2 id="server-status"><a class="header" href="#server-status">server-status</a></h2>
 <p><code>distribute status</code> prints out all the running jobs at the head node. It will show you all the job batches
