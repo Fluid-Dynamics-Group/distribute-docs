@@ -258,7 +258,8 @@ a job can be paused is four hours (<code>4h</code>), but if this is not enough y
 upper bound is just present to remove any chance of you accidentally leaving the jobs paused for an extended
 period of time.</p>
 <p>If you decide that you no longer need the tasks paused, you can simply <code>Ctrl-C</code> to quit the hanging command
-and all processes will be automatically resumed.</p>
+and all processes will be automatically resumed. <strong>Do not close your terminal</strong> before the pausing finishes or
+you have canceled it with <code>Ctrl-C</code> as the job on your machine will never resume.</p>
 <p>some examples of this command:</p>
 <pre><code class="language-bash">sudo distribute pause 4h
 </code></pre>
