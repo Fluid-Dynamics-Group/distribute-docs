@@ -1,36 +1,73 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" />
+  <meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
   <title>API Reference &mdash; distribute_compute_config  documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
         <script src="_static/sphinx_highlight.js"></script>
-    <script src="_static/js/theme.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Example" href="example.html" />
     <link rel="prev" title="distribute_compute_config documentation" href="index.html" /> 
 </head>
 
-<body class="wy-body-for-nav"> 
+<body class="wy-body-for-nav">
+
+   
   <div class="wy-grid-for-nav">
+    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
+          
+
+          
             <a href="index.html" class="icon icon-home"> distribute_compute_config
+          
+
+          
           </a>
+
+          
+            
+            
+          
+
+          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -38,7 +75,18 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
               <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">API Reference</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#distribute_compute_config.apptainer_config"><code class="docutils literal notranslate"><span class="pre">apptainer_config()</span></code></a></li>
@@ -53,41 +101,82 @@
 <li class="toctree-l1"><a class="reference internal" href="example.html">Example</a></li>
 </ul>
 
+            
+          
         </div>
+        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">distribute_compute_config</a>
+        
       </nav>
 
+
       <div class="wy-nav-content">
+        
         <div class="rst-content">
-          <div role="navigation" aria-label="Page navigation">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a></li>
-      <li class="breadcrumb-item active">API Reference</li>
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>API Reference</li>
+    
+    
       <li class="wy-breadcrumbs-aside">
+        
+          
             <a href="_sources/api.rst.txt" rel="nofollow"> View page source</a>
+          
+        
       </li>
+    
   </ul>
+
+  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-             
+            
   <section id="api-reference">
-<h1>API Reference<a class="headerlink" href="#api-reference" title="Permalink to this heading"></a></h1>
+<h1>API Reference<a class="headerlink" href="#api-reference" title="Permalink to this heading">¶</a></h1>
 <p>The recommended way to use the API is to start by looking at the final function <code class="xref py py-func docutils literal notranslate"><span class="pre">write_config_to_file()</span></code> and work backwards
 to all the constituent functions.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="distribute_compute_config.apptainer_config">
-<span class="sig-prename descclassname"><span class="pre">distribute_compute_config.</span></span><span class="sig-name descname"><span class="pre">apptainer_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">meta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Meta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Description</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ApptainerConfig</span></span></span><a class="headerlink" href="#distribute_compute_config.apptainer_config" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">distribute_compute_config.</span></span><span class="sig-name descname"><span class="pre">apptainer_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">meta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Meta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Description</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ApptainerConfig</span></span></span><a class="headerlink" href="#distribute_compute_config.apptainer_config" title="Permalink to this definition">¶</a></dt>
 <dd><p>assemble the <a class="reference internal" href="#distribute_compute_config.metadata" title="distribute_compute_config.metadata"><code class="xref py py-func docutils literal notranslate"><span class="pre">metadata()</span></code></a> and <a class="reference internal" href="#distribute_compute_config.description" title="distribute_compute_config.description"><code class="xref py py-func docutils literal notranslate"><span class="pre">description()</span></code></a> into a config file that can be written
 to disk</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>meta</strong> – output of <a class="reference internal" href="#distribute_compute_config.metadata" title="distribute_compute_config.metadata"><code class="xref py py-func docutils literal notranslate"><span class="pre">metadata()</span></code></a> function</p></li>
 <li><p><strong>description</strong> – output of <a class="reference internal" href="#distribute_compute_config.description" title="distribute_compute_config.description"><code class="xref py py-func docutils literal notranslate"><span class="pre">description()</span></code></a> function</p></li>
@@ -99,10 +188,10 @@ to disk</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="distribute_compute_config.metadata">
-<span class="sig-prename descclassname"><span class="pre">distribute_compute_config.</span></span><span class="sig-name descname"><span class="pre">metadata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">namespace</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">capabilities</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matrix_username</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Meta</span></span></span><a class="headerlink" href="#distribute_compute_config.metadata" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">distribute_compute_config.</span></span><span class="sig-name descname"><span class="pre">metadata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">namespace</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">capabilities</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matrix_username</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Meta</span></span></span><a class="headerlink" href="#distribute_compute_config.metadata" title="Permalink to this definition">¶</a></dt>
 <dd><p>construct the metadata <code class="docutils literal notranslate"><span class="pre">Meta</span></code> object for information about what this job batch will run</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>namespace</strong> (<em>str</em>) – namespace where several <code class="docutils literal notranslate"><span class="pre">batch_name</span></code> runs may live</p></li>
 <li><p><strong>batch_name</strong> (<em>str</em>) – the name of this batch of jobs</p></li>
@@ -126,11 +215,11 @@ to disk</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="distribute_compute_config.description">
-<span class="sig-prename descclassname"><span class="pre">distribute_compute_config.</span></span><span class="sig-name descname"><span class="pre">description</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">initialize</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Initialize</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">jobs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Job</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Description</span></span></span><a class="headerlink" href="#distribute_compute_config.description" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">distribute_compute_config.</span></span><span class="sig-name descname"><span class="pre">description</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">initialize</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Initialize</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">jobs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Job</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Description</span></span></span><a class="headerlink" href="#distribute_compute_config.description" title="Permalink to this definition">¶</a></dt>
 <dd><p>combines initialization information with a list of jobs to describe the solver files,
 how they should be started, and what they will run</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>initialize</strong> – You can create an <code class="docutils literal notranslate"><span class="pre">Initialize</span></code> struct with <a class="reference internal" href="#distribute_compute_config.initialize" title="distribute_compute_config.initialize"><code class="xref py py-func docutils literal notranslate"><span class="pre">initialize()</span></code></a></p></li>
 <li><p><strong>jobs</strong> – information for each job can be created from the <a class="reference internal" href="#distribute_compute_config.job" title="distribute_compute_config.job"><code class="xref py py-func docutils literal notranslate"><span class="pre">job()</span></code></a> function.</p></li>
@@ -161,10 +250,10 @@ how they should be started, and what they will run</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="distribute_compute_config.file">
-<span class="sig-prename descclassname"><span class="pre">distribute_compute_config.</span></span><span class="sig-name descname"><span class="pre">file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">relative</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alias</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">File</span></span></span><a class="headerlink" href="#distribute_compute_config.file" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">distribute_compute_config.</span></span><span class="sig-name descname"><span class="pre">file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">relative</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alias</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">File</span></span></span><a class="headerlink" href="#distribute_compute_config.file" title="Permalink to this definition">¶</a></dt>
 <dd><p>create a file to appear in the <code class="docutils literal notranslate"><span class="pre">/input</span></code> directory of the solver</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>path</strong> – a path to the file on disk. <code class="docutils literal notranslate"><span class="pre">path</span></code> should be an absolute, unless <code class="docutils literal notranslate"><span class="pre">relative=True</span></code> is also specified. If <code class="docutils literal notranslate"><span class="pre">relative=True</span></code> is not speficied, the full directory structure to the file <em>must</em> already exist.</p></li>
 <li><p><strong>relative</strong> – a flag for if the <code class="docutils literal notranslate"><span class="pre">path</span></code> specified is a relative path or not. Defaults to <cite>False</cite></p></li>
@@ -200,12 +289,12 @@ how they should be started, and what they will run</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="distribute_compute_config.initialize">
-<span class="sig-prename descclassname"><span class="pre">distribute_compute_config.</span></span><span class="sig-name descname"><span class="pre">initialize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sif_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">required_files</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">File</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">required_mounts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Initialize</span></span></span><a class="headerlink" href="#distribute_compute_config.initialize" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">distribute_compute_config.</span></span><span class="sig-name descname"><span class="pre">initialize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sif_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">required_files</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">File</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">required_mounts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Initialize</span></span></span><a class="headerlink" href="#distribute_compute_config.initialize" title="Permalink to this definition">¶</a></dt>
 <dd><p>create the <cite>initialize</cite> section for loading <code class="docutils literal notranslate"><span class="pre">apptainer</span></code> <code class="docutils literal notranslate"><span class="pre">.sif</span></code> files, required container
 mounts, and input files present in all runs.</p>
 <p>Also see the documentation for creating a <code class="docutils literal notranslate"><span class="pre">File</span></code> with the <a class="reference internal" href="#distribute_compute_config.file" title="distribute_compute_config.file"><code class="xref py py-func docutils literal notranslate"><span class="pre">file()</span></code></a> function</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>sif_path</strong> – The path to the <code class="docutils literal notranslate"><span class="pre">.sif</span></code> file produced by <code class="docutils literal notranslate"><span class="pre">apptainer</span> <span class="pre">build</span></code></p></li>
 <li><p><strong>required_files</strong> – These files appear in the <code class="docutils literal notranslate"><span class="pre">/input</span></code> directory of every job, in addition to the <code class="docutils literal notranslate"><span class="pre">File</span></code> specified in each <code class="docutils literal notranslate"><span class="pre">Job</span></code></p></li>
@@ -234,13 +323,13 @@ mounts, and input files present in all runs.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="distribute_compute_config.job">
-<span class="sig-prename descclassname"><span class="pre">distribute_compute_config.</span></span><span class="sig-name descname"><span class="pre">job</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">required_files</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">File</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Job</span></span></span><a class="headerlink" href="#distribute_compute_config.job" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">distribute_compute_config.</span></span><span class="sig-name descname"><span class="pre">job</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">required_files</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">File</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Job</span></span></span><a class="headerlink" href="#distribute_compute_config.job" title="Permalink to this definition">¶</a></dt>
 <dd><p>creates a job from its name and the required input files</p>
 <p>once you have a list of jobs that should be run in the batch, move on to creating a
 <a class="reference internal" href="#distribute_compute_config.description" title="distribute_compute_config.description"><code class="xref py py-func docutils literal notranslate"><span class="pre">description()</span></code></a></p>
 <p>Also see the documentation for creating a <code class="docutils literal notranslate"><span class="pre">File</span></code> with the <a class="reference internal" href="#distribute_compute_config.file" title="distribute_compute_config.file"><code class="xref py py-func docutils literal notranslate"><span class="pre">file()</span></code></a> function</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>name</strong> – the name of the job. It should be unique in combination with the <code class="docutils literal notranslate"><span class="pre">batch_name</span></code> of this job.</p></li>
 <li><p><strong>required_files</strong> – a python list of files that should appear in the <code class="docutils literal notranslate"><span class="pre">/input</span></code> directory when this job is run, along with the <code class="docutils literal notranslate"><span class="pre">required_files</span></code> specified in <a class="reference internal" href="#distribute_compute_config.initialize" title="distribute_compute_config.initialize"><code class="xref py py-func docutils literal notranslate"><span class="pre">initialize()</span></code></a>.</p></li>
@@ -268,10 +357,10 @@ This will make it easier to use <code class="docutils literal notranslate"><span
 
 <dl class="py function">
 <dt class="sig sig-object py" id="distribute_compute_config.write_config_to_file">
-<span class="sig-prename descclassname"><span class="pre">distribute_compute_config.</span></span><span class="sig-name descname"><span class="pre">write_config_to_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ApptainerConfig</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#distribute_compute_config.write_config_to_file" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">distribute_compute_config.</span></span><span class="sig-name descname"><span class="pre">write_config_to_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ApptainerConfig</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#distribute_compute_config.write_config_to_file" title="Permalink to this definition">¶</a></dt>
 <dd><p>write an <a class="reference internal" href="#distribute_compute_config.apptainer_config" title="distribute_compute_config.apptainer_config"><code class="xref py py-func docutils literal notranslate"><span class="pre">apptainer_config()</span></code></a> to a path</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>config</strong> – output of <a class="reference internal" href="#distribute_compute_config.apptainer_config" title="distribute_compute_config.apptainer_config"><code class="xref py py-func docutils literal notranslate"><span class="pre">apptainer_config()</span></code></a> function</p></li>
 <li><p><strong>path</strong> – the path that the config file should be written to, usually with the name <code class="docutils literal notranslate"><span class="pre">distribute-jobs.yaml</span></code></p></li>
@@ -286,33 +375,50 @@ This will make it easier to use <code class="docutils literal notranslate"><span
 
 
            </div>
+           
           </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="index.html" class="btn btn-neutral float-left" title="distribute_compute_config documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
         <a href="example.html" class="btn btn-neutral float-right" title="Example" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="index.html" class="btn btn-neutral float-left" title="distribute_compute_config documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2022, Brooks.</p>
-  </div>
+    <p>
+        &#169; Copyright 2022, Brooks.
 
-  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    provided by <a href="https://readthedocs.org">Read the Docs</a>.
-   
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
         </div>
       </div>
+
     </section>
+
   </div>
-  <script>
+  
+
+  <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+
+  
+  
+    
+   
 
 </body>
 </html>
