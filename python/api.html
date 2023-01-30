@@ -202,7 +202,7 @@ to disk</p>
 </dl>
 <p>for an apptainer job the <code class="docutils literal notranslate"><span class="pre">capabilities</span></code> are is simply <code class="docutils literal notranslate"><span class="pre">[&quot;apptainer&quot;]</span></code>. If you need GPU capabilities, use <code class="docutils literal notranslate"><span class="pre">[&quot;apptainer&quot;,</span> <span class="pre">&quot;gpu&quot;]</span></code>.</p>
 <p>Example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">distribute_compute_config</span> <span class="k">as</span> <span class="nn">distribute</span> 
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">distribute_compute_config</span> <span class="k">as</span> <span class="nn">distribute</span>
 <span class="n">matrix_user</span> <span class="o">=</span> <span class="s2">&quot;@matrx_id:matrix.org&quot;</span>
 <span class="n">batch_name</span> <span class="o">=</span> <span class="s2">&quot;test_batch&quot;</span>
 <span class="n">namespace</span> <span class="o">=</span> <span class="s2">&quot;test_namespace&quot;</span>
@@ -230,14 +230,14 @@ how they should be started, and what they will run</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">distribute_compute_config</span> <span class="k">as</span> <span class="nn">distribute</span>
 
 <span class="n">initialize</span> <span class="o">=</span> <span class="n">distribute</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span>
-    <span class="n">sif_path</span><span class="o">=</span><span class="s2">&quot;./some/path/to/file.sif&quot;</span><span class="p">,</span> 
-    <span class="n">required_files</span><span class="o">=</span><span class="p">[],</span> 
+    <span class="n">sif_path</span><span class="o">=</span><span class="s2">&quot;./some/path/to/file.sif&quot;</span><span class="p">,</span>
+    <span class="n">required_files</span><span class="o">=</span><span class="p">[],</span>
     <span class="n">required_mounts</span><span class="o">=</span><span class="p">[]</span>
 <span class="p">)</span>
 
 <span class="n">job_1_config_file</span> <span class="o">=</span> <span class="n">distribute</span><span class="o">.</span><span class="n">file</span><span class="p">(</span>
-    <span class="s2">&quot;./path/to/config1.json&quot;</span><span class="p">,</span> 
-    <span class="n">alias</span><span class="o">=</span><span class="s2">&quot;config.json&quot;</span><span class="p">,</span> 
+    <span class="s2">&quot;./path/to/config1.json&quot;</span><span class="p">,</span>
+    <span class="n">alias</span><span class="o">=</span><span class="s2">&quot;config.json&quot;</span><span class="p">,</span>
     <span class="n">relative</span><span class="o">=</span><span class="kc">True</span>
 <span class="p">)</span>
 
@@ -269,18 +269,18 @@ how they should be started, and what they will run</p>
 
 <span class="c1"># config1.json appears as `/input/config.json`</span>
 <span class="n">config_file_1</span> <span class="o">=</span> <span class="n">distribute</span><span class="o">.</span><span class="n">file</span><span class="p">(</span>
-    <span class="s2">&quot;./path/to/config1.json&quot;</span><span class="p">,</span> 
-    <span class="n">alias</span><span class="o">=</span><span class="s2">&quot;config.json&quot;</span><span class="p">,</span> 
+    <span class="s2">&quot;./path/to/config1.json&quot;</span><span class="p">,</span>
+    <span class="n">alias</span><span class="o">=</span><span class="s2">&quot;config.json&quot;</span><span class="p">,</span>
     <span class="n">relative</span><span class="o">=</span><span class="kc">True</span>
 <span class="p">)</span>
 
 <span class="c1"># config2.json appears as `/input/config2.json`</span>
 <span class="n">config_file_2</span> <span class="o">=</span> <span class="n">distribute</span><span class="o">.</span><span class="n">file</span><span class="p">(</span>
-    <span class="s2">&quot;./path/to/config2.json&quot;</span><span class="p">,</span> 
+    <span class="s2">&quot;./path/to/config2.json&quot;</span><span class="p">,</span>
     <span class="n">relative</span><span class="o">=</span><span class="kc">True</span>
 <span class="p">)</span>
 
-<span class="c1"># config3.json appears as `/input/config3.json`, folder structure </span>
+<span class="c1"># config3.json appears as `/input/config3.json`, folder structure</span>
 <span class="c1"># `/root/path/to/` must already exist</span>
 <span class="n">config_file_3</span> <span class="o">=</span> <span class="n">distribute</span><span class="o">.</span><span class="n">file</span><span class="p">(</span><span class="s2">&quot;/root/path/to/config3.json&quot;</span><span class="p">)</span>
 </pre></div>
@@ -303,13 +303,13 @@ mounts, and input files present in all runs.</p>
 </dd>
 </dl>
 <p>Example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">distribute_compute_config</span> <span class="k">as</span> <span class="nn">distribute</span> 
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">distribute_compute_config</span> <span class="k">as</span> <span class="nn">distribute</span>
 
 <span class="n">sif_path</span> <span class="o">=</span> <span class="s2">&quot;./path/to/some/container.sif&quot;</span>
 
 <span class="n">initial_condition</span> <span class="o">=</span> <span class="n">distribute</span><span class="o">.</span><span class="n">file</span><span class="p">(</span>
-    <span class="s2">&quot;./path/to/some/file.h5&quot;</span><span class="p">,</span> 
-    <span class="n">relative</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+    <span class="s2">&quot;./path/to/some/file.h5&quot;</span><span class="p">,</span>
+    <span class="n">relative</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="n">alias</span><span class="o">=</span><span class="s2">&quot;initial_condition.h5&quot;</span>
 <span class="p">)</span>
 <span class="n">required_files</span> <span class="o">=</span> <span class="p">[</span><span class="n">initial_condition</span><span class="p">]</span>
@@ -344,8 +344,8 @@ This will make it easier to use <code class="docutils literal notranslate"><span
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">distribute_compute_config</span> <span class="k">as</span> <span class="nn">distribute</span>
 
 <span class="n">job_1_config_file</span> <span class="o">=</span> <span class="n">distribute</span><span class="o">.</span><span class="n">file</span><span class="p">(</span>
-    <span class="s2">&quot;./path/to/config1.json&quot;</span><span class="p">,</span> 
-    <span class="n">alias</span><span class="o">=</span><span class="s2">&quot;config.json&quot;</span><span class="p">,</span> 
+    <span class="s2">&quot;./path/to/config1.json&quot;</span><span class="p">,</span>
+    <span class="n">alias</span><span class="o">=</span><span class="s2">&quot;config.json&quot;</span><span class="p">,</span>
     <span class="n">relative</span><span class="o">=</span><span class="kc">True</span>
 <span class="p">)</span>
 <span class="n">job_1_required_files</span> <span class="o">=</span> <span class="p">[</span><span class="n">job_1_config_file</span><span class="p">]</span>
